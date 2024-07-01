@@ -12,6 +12,8 @@ namespace Main
         {
             if (!player.IsInVehicle) return;
 
+            if (player.VehicleSeat != 0) return;
+
             List<bool> indicatorStates = NAPI.Util.FromJson<List<bool>>(vehicleIndicatorData);
 
             if (indicatorStates.Count > 2 || indicatorStates.Count < 2) return;
