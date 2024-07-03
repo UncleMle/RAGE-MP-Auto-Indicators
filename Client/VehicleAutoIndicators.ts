@@ -15,6 +15,7 @@ export default class AutoIndicators {
 
     private static readonly CheckIndicatorsTimeMs: number = 100;
     private static readonly SpamDelayMs: number = 250;
+    private static readonly MinimumSteeringRange: number = 30;
     private static readonly SyncIndicatorStatesServerEvent: string = "S::AutoIndicators:SetIndicatorData";
     private static readonly VehicleIndicatorStateKey: string = "AutoIndicatorsShared@vehicle";
 
@@ -128,7 +129,7 @@ export default class AutoIndicators {
 
         if (vehicle.getPedInSeat(-1) !== AutoIndicators.LocalPlayer.handle) return;
 
-        if (Math.abs(angle) < 15 || !AutoIndicators.LocalPlayer.vehicle.getIsEngineRunning()) {
+        if (Math.abs(angle) < AutoIndicators.MinimumSteeringRange || !AutoIndicators.LocalPlayer.vehicle.getIsEngineRunning()) {
             AutoIndicators.StopIndicating();
             return;
         }
